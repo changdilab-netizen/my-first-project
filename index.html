@@ -25,7 +25,6 @@
       overflow: hidden;
     }
 
-    /* 별 배경 효과 */
     body::before {
       content: '';
       position: fixed;
@@ -61,7 +60,7 @@
       width: 100%;
       height: 100%;
       background:
-        radial-gradient(ellipse 800px 400px at 50% 10%, rgba(138, 43, 226, 0.25) 0%, transparent 40%),
+        radial-gradient(ellipse 800px 400px at 50% 10%, rgba(218, 165, 32, 0.25) 0%, transparent 40%),
         radial-gradient(ellipse 900px 450px at 30% 50%, rgba(75, 0, 130, 0.2) 0%, transparent 50%),
         radial-gradient(ellipse 850px 400px at 70% 40%, rgba(138, 43, 226, 0.2) 0%, transparent 45%);
       pointer-events: none;
@@ -78,65 +77,15 @@
       }
     }
 
-    .sparkles {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      margin-left: -150px;
-      margin-top: -150px;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .card.revealed ~ .sparkles .sparkle {
-      animation: sparkleOutward 0.8s ease-out forwards;
-    }
-
-    .sparkle:nth-child(1) { animation-delay: 0s; }
-    .sparkle:nth-child(2) { animation-delay: 0.05s; }
-    .sparkle:nth-child(3) { animation-delay: 0.1s; }
-    .sparkle:nth-child(4) { animation-delay: 0.15s; }
-    .sparkle:nth-child(5) { animation-delay: 0.2s; }
-    .sparkle:nth-child(6) { animation-delay: 0.25s; }
-    .sparkle:nth-child(7) { animation-delay: 0.3s; }
-    .sparkle:nth-child(8) { animation-delay: 0.35s; }
-
-    .card.revealed ~ .sparkles .sparkle {
-      animation: sparkleOutward 0.8s ease-out forwards;
-    }
-
-    @keyframes sparkleOutward {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-        filter: drop-shadow(0 0 4px #daa520);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        filter: drop-shadow(0 0 0px #daa520);
-      }
-    }
-
     .container {
       position: relative;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
+      gap: 2rem;
       padding: 2rem;
-      max-width: 600px;
+      max-width: 1000px;
       width: 100%;
     }
 
@@ -154,22 +103,30 @@
       50% { text-shadow: 0 0 30px rgba(218, 165, 32, 0.8), 0 0 60px rgba(75, 0, 130, 0.5); }
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px);
-        filter: drop-shadow(0 15px 30px rgba(218, 165, 32, 0.15));
-      }
-      50% {
-        transform: translateY(-25px);
-        filter: drop-shadow(0 25px 50px rgba(218, 165, 32, 0.3));
-      }
+    .cards-container {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      min-height: 420px;
+      perspective: 1000px;
     }
 
-    .card-container {
+    .card-wrapper {
       perspective: 1000px;
       height: 420px;
-      width: 280px;
-      animation: float 5s ease-in-out infinite;
+      width: 220px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card-wrapper.selected {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 30px rgba(218, 165, 32, 0.8));
+    }
+
+    .card-wrapper:not(.selected):hover {
+      transform: scale(1.05);
     }
 
     .card {
@@ -202,11 +159,7 @@
     }
 
     .card-back {
-      background-image:
-        url('data:image/svg+xml;utf8,<svg width="280" height="420" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="stars" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.2" fill="%23daa520"/><circle cx="35" cy="20" r="0.8" fill="%23daa520" opacity="0.6"/><circle cx="25" cy="40" r="1" fill="%23daa520" opacity="0.7"/><circle cx="45" cy="35" r="0.7" fill="%23daa520" opacity="0.5"/></pattern></defs><rect width="280" height="420" fill="%231a0f33"/><rect width="280" height="420" fill="url(%23stars)"/><circle cx="140" cy="210" r="95" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.2"/><circle cx="140" cy="210" r="75" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.15"/><circle cx="140" cy="210" r="55" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.1"/><path d="M 140 115 L 165 180 L 115 180 Z" fill="none" stroke="%23daa520" opacity="0.1" stroke-width="0.5"/><path d="M 140 305 L 165 240 L 115 240 Z" fill="none" stroke="%23daa520" opacity="0.1" stroke-width="0.5"/><line x1="50" y1="210" x2="230" y2="210" stroke="%23daa520" stroke-width="0.5" opacity="0.08"/><line x1="140" y1="100" x2="140" y2="320" stroke="%23daa520" stroke-width="0.5" opacity="0.08"/><text x="140" y="220" text-anchor="middle" font-size="70" fill="%23daa520" opacity="0.08" font-family="serif">✦</text></svg>'),
-        linear-gradient(135deg, #2d1b4e 0%, #1a0f33 100%);
-      background-size: 100% 100%, 100% 100%;
-      background-position: center, center;
+      background: linear-gradient(135deg, #2d1b4e 0%, #1a0f33 100%);
       color: #daa520;
       font-weight: bold;
       font-size: 1.2rem;
@@ -241,6 +194,13 @@
       margin-top: 0.5rem;
     }
 
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
     button {
       padding: 1rem 3rem;
       font-size: 1.1rem;
@@ -267,6 +227,28 @@
       transform: translateY(-1px);
     }
 
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result-message {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #daa520;
+      min-height: 2rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #b0956e;
+      text-align: center;
+      margin-top: -1.5rem;
+      font-style: italic;
+    }
+
     .share-btn {
       margin-top: 0.8rem;
       padding: 0;
@@ -290,32 +272,23 @@
       text-decoration: underline;
     }
 
-    .share-btn:active {
-      transform: none;
-      opacity: 0.8;
-    }
-
     .share-btn.copied {
       color: #7cb342;
       opacity: 0.9;
     }
 
-    .subtitle {
-      font-size: 0.95rem;
-      color: #b0956e;
-      text-align: center;
-      margin-top: -1.5rem;
-      font-style: italic;
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       h1 {
         font-size: 2rem;
       }
 
-      .card-container {
+      .cards-container {
+        gap: 1rem;
+      }
+
+      .card-wrapper {
         height: 360px;
-        width: 240px;
+        width: 180px;
       }
 
       .card-face {
@@ -335,37 +308,15 @@
     <h1>✨ 오늘의 운세 ✨</h1>
     <p class="subtitle">카드를 뽑아 오늘의 운명을 알아보세요</p>
 
-    <div class="card-container">
-      <div class="card" id="card">
-        <div class="card-face card-back">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; line-height: 1.2;">
-            <span style="font-size: 1.5rem; color: #daa520;">✦</span>
-            <span style="font-size: 1rem; color: #daa520;">✧ ✧ ✧</span>
-            <span style="font-size: 1.2rem; color: #daa520;">◇ ◆ ◇</span>
-            <span style="font-size: 1rem; color: #daa520;">✧ ✧ ✧</span>
-            <span style="font-size: 1.5rem; color: #daa520;">✦</span>
-          </div>
-        </div>
-        <div class="card-face card-front">
-          <div class="card-symbol" id="cardSymbol">🔮</div>
-          <div class="card-name" id="cardName">타로</div>
-          <div class="card-message" id="cardMessage">카드를 뽑아주세요</div>
-        </div>
-      </div>
-      <div class="sparkles">
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-        <span class="sparkle">✨</span>
-      </div>
+    <div id="cardsSection" style="display: none;">
+      <div class="cards-container" id="cardsContainer"></div>
+      <div class="result-message" id="resultMessage">카드를 선택해주세요</div>
     </div>
 
-    <button id="drawBtn">오늘의 운세 뽑기</button>
-    <button id="shareBtn" class="share-btn">친구에게 공유하기</button>
+    <div class="button-group">
+      <button id="drawBtn">오늘의 운세 뽑기</button>
+      <button id="shareBtn" class="share-btn">친구에게 공유하기</button>
+    </div>
   </div>
 
   <script>
@@ -492,52 +443,77 @@
       }
     ];
 
-    let lastIndex = -1;
-    const cardElement = document.getElementById('card');
     const drawBtn = document.getElementById('drawBtn');
-    const cardSymbol = document.getElementById('cardSymbol');
-    const cardName = document.getElementById('cardName');
-    const cardMessage = document.getElementById('cardMessage');
-    const sparkles = document.querySelectorAll('.sparkle');
+    const shareBtn = document.getElementById('shareBtn');
+    const cardsSection = document.getElementById('cardsSection');
+    const cardsContainer = document.getElementById('cardsContainer');
+    const resultMessage = document.getElementById('resultMessage');
+    let selectedCardData = null;
 
-    sparkles.forEach((sparkle, index) => {
-      const angle = (index / sparkles.length) * 360;
-      const rad = angle * Math.PI / 180;
-      const x = Math.cos(rad) * 140;
-      const y = Math.sin(rad) * 140;
-      sparkle.style.setProperty('--tx', `${x}px`);
-      sparkle.style.setProperty('--ty', `${y}px`);
-    });
+    function getRandomCards(count) {
+      const shuffled = [...cards].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, count);
+    }
 
-    function getRandomCard() {
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * cards.length);
-      } while (newIndex === lastIndex && cards.length > 1);
-      lastIndex = newIndex;
-      return cards[newIndex];
+    function createCardElement(cardData, index) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'card-wrapper';
+      wrapper.dataset.index = index;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const cardBack = document.createElement('div');
+      cardBack.className = 'card-face card-back';
+      cardBack.innerHTML = '<span>✦</span>';
+
+      const cardFront = document.createElement('div');
+      cardFront.className = 'card-face card-front';
+      cardFront.innerHTML = `
+        <div class="card-symbol">${cardData.symbol}</div>
+        <div class="card-name">${cardData.name}</div>
+        <div class="card-message">${cardData.message}</div>
+      `;
+
+      card.appendChild(cardBack);
+      card.appendChild(cardFront);
+      wrapper.appendChild(card);
+
+      wrapper.addEventListener('click', () => selectCard(wrapper, cardData));
+
+      return wrapper;
+    }
+
+    function selectCard(wrapper, cardData) {
+      document.querySelectorAll('.card-wrapper').forEach(w => {
+        w.classList.remove('selected');
+      });
+
+      wrapper.classList.add('selected');
+      selectedCardData = cardData;
+      resultMessage.textContent = `"${cardData.name}"을(를) 선택하셨습니다! ✨`;
     }
 
     drawBtn.addEventListener('click', () => {
-      const card = getRandomCard();
+      const selectedCards = getRandomCards(3);
+      cardsContainer.innerHTML = '';
+      selectedCardData = null;
+      resultMessage.textContent = '카드를 선택해주세요';
 
-      if (cardElement.classList.contains('revealed')) {
-        cardElement.classList.remove('revealed');
+      selectedCards.forEach((cardData, index) => {
+        const cardElement = createCardElement(cardData, index);
+        cardsContainer.appendChild(cardElement);
+
         setTimeout(() => {
-          cardSymbol.textContent = card.symbol;
-          cardName.textContent = card.name;
-          cardMessage.textContent = card.message;
-          cardElement.classList.add('revealed');
-        }, 600);
-      } else {
-        cardSymbol.textContent = card.symbol;
-        cardName.textContent = card.name;
-        cardMessage.textContent = card.message;
-        cardElement.classList.add('revealed');
-      }
+          const card = cardElement.querySelector('.card');
+          card.classList.add('revealed');
+        }, 100 + index * 150);
+      });
+
+      cardsSection.style.display = 'block';
+      drawBtn.textContent = '다시 뽑기';
     });
 
-    const shareBtn = document.getElementById('shareBtn');
     shareBtn.addEventListener('click', () => {
       const url = window.location.href;
       navigator.clipboard.writeText(url).then(() => {
