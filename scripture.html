@@ -20,7 +20,7 @@
       justify-content: center;
       align-items: center;
       font-family: 'Noto Serif KR', serif;
-      color: #e8d5c4;
+      color: #3d2817;
       position: relative;
       overflow: hidden;
     }
@@ -103,9 +103,9 @@
       50% { text-shadow: 0 0 30px rgba(218, 165, 32, 0.8), 0 0 60px rgba(75, 0, 130, 0.5); }
     }
 
-    .scripture-container {
+    .scroll-container {
       perspective: 1000px;
-      height: 380px;
+      height: 420px;
       width: 100%;
       max-width: 500px;
       animation: float 5s ease-in-out infinite;
@@ -122,66 +122,97 @@
       }
     }
 
-    .scripture {
+    .scroll {
       position: relative;
       width: 100%;
       height: 100%;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center;
     }
 
-    .scripture.revealed {
-      transform: rotateY(180deg);
+    .scroll.revealed {
+      transform: rotateX(0deg) scale(1);
     }
 
-    .scripture-face {
-      position: absolute;
+    .scroll.hidden {
+      transform: rotateX(45deg) scale(0.9);
+    }
+
+    .scroll-content {
       width: 100%;
       height: 100%;
-      backface-visibility: hidden;
+      background: linear-gradient(135deg, #f5e6d3 0%, #e8d4bf 50%, #dcc4a8 100%);
+      border-radius: 10px;
+      padding: 3rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 2px solid #daa520;
-      border-radius: 15px;
-      padding: 2rem;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset -2px -2px 8px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 8px rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(139, 90, 43, 0.3) 0%, transparent 100%);
+      border-radius: 10px 10px 0 0;
+    }
+
+    .scroll-content::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(0deg, rgba(139, 90, 43, 0.3) 0%, transparent 100%);
+      border-radius: 0 0 10px 10px;
+    }
+
+    .illustration {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: float-icon 3s ease-in-out infinite;
+    }
+
+    @keyframes float-icon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .scripture-text-wrapper {
+      position: relative;
+      z-index: 1;
       text-align: center;
-      box-shadow: 0 0 30px rgba(218, 165, 32, 0.4), inset 0 0 30px rgba(218, 165, 32, 0.1);
-    }
-
-    .scripture-back {
-      background-image:
-        url('data:image/svg+xml;utf8,<svg width="500" height="380" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="stars" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.2" fill="%23daa520"/><circle cx="35" cy="20" r="0.8" fill="%23daa520" opacity="0.6"/><circle cx="25" cy="40" r="1" fill="%23daa520" opacity="0.7"/><circle cx="45" cy="35" r="0.7" fill="%23daa520" opacity="0.5"/></pattern></defs><rect width="500" height="380" fill="%231a0f33"/><rect width="500" height="380" fill="url(%23stars)"/><circle cx="250" cy="190" r="95" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.2"/><circle cx="250" cy="190" r="75" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.15"/><circle cx="250" cy="190" r="55" fill="none" stroke="%23daa520" stroke-width="0.8" opacity="0.1"/><path d="M 250 95 L 275 160 L 225 160 Z" fill="none" stroke="%23daa520" opacity="0.1" stroke-width="0.5"/><path d="M 250 285 L 275 220 L 225 220 Z" fill="none" stroke="%23daa520" opacity="0.1" stroke-width="0.5"/><line x1="150" y1="190" x2="350" y2="190" stroke="%23daa520" stroke-width="0.5" opacity="0.08"/><line x1="250" y1="80" x2="250" y2="300" stroke="%23daa520" stroke-width="0.5" opacity="0.08"/><text x="250" y="200" text-anchor="middle" font-size="50" fill="%23daa520" opacity="0.08" font-family="serif">✦</text></svg>'),
-        linear-gradient(135deg, #2d1b4e 0%, #1a0f33 100%);
-      background-size: 100% 100%, 100% 100%;
-      background-position: center, center;
-      color: #daa520;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .scripture-front {
-      background: linear-gradient(135deg, #1a0f33 0%, #2d1b4e 100%);
-      transform: rotateY(180deg);
-      gap: 1.5rem;
-      padding: 1.5rem;
     }
 
     .scripture-text {
-      font-size: 1rem;
-      color: #e8d5c4;
-      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #3d2817;
+      line-height: 1.9;
       font-style: italic;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
     }
 
     .scripture-reference {
-      font-size: 0.9rem;
-      color: #daa520;
+      font-size: 1rem;
+      color: #8b5a2b;
       font-weight: 700;
-      letter-spacing: 1px;
-      margin-top: auto;
+      letter-spacing: 0.5px;
+      text-decoration: underline;
+      text-decoration-color: #c19a6b;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 6px;
     }
 
     button {
@@ -266,7 +297,7 @@
       pointer-events: none;
     }
 
-    .scripture.revealed ~ .sparkles .sparkle {
+    .scroll.revealed ~ .sparkles .sparkle {
       animation: sparkleOutward 0.8s ease-out forwards;
     }
 
@@ -297,13 +328,16 @@
         font-size: 2rem;
       }
 
-      .scripture-container {
+      .scroll-container {
         height: 360px;
       }
 
-      .scripture-face {
-        font-size: 3.5rem;
-        padding: 1.5rem;
+      .scroll-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .scripture-text {
+        font-size: 1rem;
       }
 
       button {
@@ -318,20 +352,14 @@
     <h1>📖 오늘의 성경말씀 📖</h1>
     <p class="subtitle">하나님의 말씀을 마음에 새기세요</p>
 
-    <div class="scripture-container">
-      <div class="scripture" id="scripture">
-        <div class="scripture-face scripture-back">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; line-height: 1.2;">
-            <span style="font-size: 1.5rem; color: #daa520;">✦</span>
-            <span style="font-size: 1rem; color: #daa520;">✧ ✧ ✧</span>
-            <span style="font-size: 1.2rem; color: #daa520;">◇ ◆ ◇</span>
-            <span style="font-size: 1rem; color: #daa520;">✧ ✧ ✧</span>
-            <span style="font-size: 1.5rem; color: #daa520;">✦</span>
+    <div class="scroll-container">
+      <div class="scroll hidden" id="scroll">
+        <div class="scroll-content">
+          <div class="illustration" id="illustration">📖</div>
+          <div class="scripture-text-wrapper">
+            <div class="scripture-text" id="scriptureText">주의 말씀은 내 발의 등이요</div>
+            <div class="scripture-reference" id="scriptureRef">시편 119:105</div>
           </div>
-        </div>
-        <div class="scripture-face scripture-front">
-          <div class="scripture-text" id="scriptureText">주의 말씀은 내 발의 등이요</div>
-          <div class="scripture-reference" id="scriptureRef">시편 119:105</div>
         </div>
       </div>
       <div class="sparkles">
@@ -354,107 +382,132 @@
     const scriptures = [
       {
         text: '예수께서 이르시되 나는 길이요 진리요 생명이니\n나로 말미암지 않고는 아버지께로 올 자가 없느니라',
-        reference: '요한복음 14:6'
-      },
-      {
-        text: '주 예수를 믿으라 그리하면 너와 네 집이 구원을 받으리라',
-        reference: '사도행전 16:31'
-      },
-      {
-        text: '모든 것이 다 내게 주어졌으니\n그러므로 나를 본 자는 아버지를 보았거늘',
-        reference: '요한복음 14:9'
-      },
-      {
-        text: '예수께서 그들에게 이르시되\n내가 진실로 진실로 너희에게 이르노니\n나는 양의 문이라',
-        reference: '요한복음 10:7'
+        reference: '요한복음 14:6',
+        icon: '🛤️'
       },
       {
         text: '하나님이 세상을 이처럼 사랑하사\n독생자를 주셨으니 이는 저를 믿는 자마다\n영생을 얻게 하려 하심이라',
-        reference: '요한복음 3:16'
+        reference: '요한복음 3:16',
+        icon: '💖'
       },
       {
-        text: '주 예수의 이름을 믿으라\n그리하면 구원을 받으리라',
-        reference: '사도행전 10:43'
-      },
-      {
-        text: '나는 포도나무요 너희는 가지니\n저가 내 안에 내가 저 안에 있으면\n이 사람은 많은 열매를 맺나니',
-        reference: '요한복음 15:5'
-      },
-      {
-        text: '영생은 곧 유일하신 참 하나님과\n그의 보내신 자 예수 그리스도를 아는 것이니이다',
-        reference: '요한복음 17:3'
-      },
-      {
-        text: '나는 평안을 너희에게 끼쳐 놓노니\n곧 나의 평안을 너희에게 주는 것이라',
-        reference: '요한복음 14:27'
-      },
-      {
-        text: '그러므로 무엇이든지 구하는 것은\n받은 줄로 믿으라 그러면 너희 것이 되리라',
-        reference: '마가복음 11:24'
-      },
-      {
-        text: '내 양은 내 음성을 들으며\n나는 그들을 알며 그들은 나를 따르느니라',
-        reference: '요한복음 10:27'
-      },
-      {
-        text: '주를 경외하는 것은 지혜의 시작이요\n거룩한 자를 아는 것은 명철이니라',
-        reference: '잠언 9:10'
-      },
-      {
-        text: '내게 주어진 모든 것을 아버지께서 주신 것이니\n나에게 와서 마시라 목이 마르지 아니하리니',
-        reference: '요한복음 7:37'
-      },
-      {
-        text: '너희는 세상의 빛이라\n산 위에 있는 도시를 숨길 수 없나니',
-        reference: '마태복음 5:14'
-      },
-      {
-        text: '너는 마음을 다하고 목숨을 다하고 뜻을 다하여\n주 너의 하나님을 사랑하라',
-        reference: '마태복음 22:37'
+        text: '주 예수를 믿으라 그리하면 너와 네 집이\n구원을 받으리라',
+        reference: '사도행전 16:31',
+        icon: '✝️'
       },
       {
         text: '수고하고 무거운 짐 진 자들아\n다 내게로 오라 내가 너희를 쉬게 하리라',
-        reference: '마태복음 11:28'
+        reference: '마태복음 11:28',
+        icon: '🕊️'
       },
       {
-        text: '우리가 그 피로 말미암아 구속 곧 죄 사함을 받았으니',
-        reference: '에베소서 1:7'
-      },
-      {
-        text: '믿음이 없이는 하나님을 기쁘시게 할 수 없나니\n하나님께 나아가는 자는 반드시 그가 계신 것과\n자기를 찾는 자들에게 상 주시는 것을 믿어야 할지니라',
-        reference: '히브리서 11:6'
-      },
-      {
-        text: '이 모든 것에 더하여 사랑을 입으라\n이것이 모든 것을 연결하는 띠니라',
-        reference: '골로새서 3:14'
-      },
-      {
-        text: '내가 그리스도와 함께 십자가에 못 박혔나니\n그러나 내가 사는 것은 내가 아니요\n오직 내 안에 그리스도께서 사시는 것이라',
-        reference: '갈라디아서 2:20'
-      },
-      {
-        text: '내 손에 너를 새겨 내었노라\n네 성벽이 항상 내 앞에 있도다',
-        reference: '이사야 49:16'
-      },
-      {
-        text: '사랑을 따라 구하고 또 신령한 것들을 사모하되\n특히 예언하기를 원하라',
-        reference: '고린도전서 14:1'
-      },
-      {
-        text: '예수님이 모든 것이 가능한 분이심을 믿으라\n그러면 너는 볼 것이다',
-        reference: '마가복음 9:23'
+        text: '나는 포도나무요 너희는 가지니\n저가 내 안에 내가 저 안에 있으면\n이 사람은 많은 열매를 맺나니',
+        reference: '요한복음 15:5',
+        icon: '🍇'
       },
       {
         text: '주의 말씀은 내 발의 등이요\n내 길의 빛이로다',
-        reference: '시편 119:105'
+        reference: '시편 119:105',
+        icon: '💡'
+      },
+      {
+        text: '너는 마음을 다하고 목숨을 다하고 뜻을 다하여\n주 너의 하나님을 사랑하라',
+        reference: '마태복음 22:37',
+        icon: '❤️'
+      },
+      {
+        text: '내 양은 내 음성을 들으며\n나는 그들을 알며 그들은 나를 따르느니라',
+        reference: '요한복음 10:27',
+        icon: '🐑'
+      },
+      {
+        text: '주를 경외하는 것은 지혜의 시작이요\n거룩한 자를 아는 것은 명철이니라',
+        reference: '잠언 9:10',
+        icon: '🎓'
+      },
+      {
+        text: '영생은 곧 유일하신 참 하나님과\n그의 보내신 자 예수 그리스도를 아는 것이니이다',
+        reference: '요한복음 17:3',
+        icon: '🌟'
+      },
+      {
+        text: '모든 것이 다 내게 주어졌으니\n그러므로 나를 본 자는 아버지를 보았거늘',
+        reference: '요한복음 14:9',
+        icon: '👁️'
+      },
+      {
+        text: '예수께서 그들에게 이르시되\n내가 진실로 진실로 너희에게 이르노니\n나는 양의 문이라',
+        reference: '요한복음 10:7',
+        icon: '🚪'
+      },
+      {
+        text: '나는 평안을 너희에게 끼쳐 놓노니\n곧 나의 평안을 너희에게 주는 것이라',
+        reference: '요한복음 14:27',
+        icon: '☮️'
+      },
+      {
+        text: '그러므로 무엇이든지 구하는 것은\n받은 줄로 믿으라 그러면 너희 것이 되리라',
+        reference: '마가복음 11:24',
+        icon: '🙏'
+      },
+      {
+        text: '내게 주어진 모든 것을 아버지께서 주신 것이니\n나에게 와서 마시라 목이 마르지 아니하리니',
+        reference: '요한복음 7:37',
+        icon: '💧'
+      },
+      {
+        text: '너희는 세상의 빛이라\n산 위에 있는 도시를 숨길 수 없나니',
+        reference: '마태복음 5:14',
+        icon: '🕯️'
+      },
+      {
+        text: '우리가 그 피로 말미암아 구속 곧\n죄 사함을 받았으니',
+        reference: '에베소서 1:7',
+        icon: '⛪'
+      },
+      {
+        text: '믿음이 없이는 하나님을 기쁘시게 할 수 없나니\n하나님께 나아가는 자는 반드시 그가 계신 것과\n자기를 찾는 자들에게 상 주시는 것을 믿어야 할지니라',
+        reference: '히브리서 11:6',
+        icon: '🏆'
+      },
+      {
+        text: '이 모든 것에 더하여 사랑을 입으라\n이것이 모든 것을 연결하는 띠니라',
+        reference: '골로새서 3:14',
+        icon: '🎀'
+      },
+      {
+        text: '내가 그리스도와 함께 십자가에 못 박혔나니\n그러나 내가 사는 것은 내가 아니요\n오직 내 안에 그리스도께서 사시는 것이라',
+        reference: '갈라디아서 2:20',
+        icon: '✨'
+      },
+      {
+        text: '내 손에 너를 새겨 내었노라\n네 성벽이 항상 내 앞에 있도다',
+        reference: '이사야 49:16',
+        icon: '🤲'
+      },
+      {
+        text: '사랑을 따라 구하고 또 신령한 것들을 사모하되\n특히 예언하기를 원하라',
+        reference: '고린도전서 14:1',
+        icon: '🎵'
+      },
+      {
+        text: '예수님이 모든 것이 가능한 분이심을 믿으라\n그러면 너는 볼 것이다',
+        reference: '마가복음 9:23',
+        icon: '✋'
+      },
+      {
+        text: '주를 기뻐하라\n주를 기뻐하는 것이 너의 힘이니라',
+        reference: '느헤미야 8:10',
+        icon: '😊'
       }
     ];
 
     let lastIndex = -1;
-    const scriptureElement = document.getElementById('scripture');
+    const scrollElement = document.getElementById('scroll');
     const drawBtn = document.getElementById('drawBtn');
     const scriptureText = document.getElementById('scriptureText');
     const scriptureRef = document.getElementById('scriptureRef');
+    const illustration = document.getElementById('illustration');
     const shareBtn = document.getElementById('shareBtn');
     const sparkles = document.querySelectorAll('.sparkle');
 
@@ -479,17 +532,22 @@
     drawBtn.addEventListener('click', () => {
       const scripture = getRandomScripture();
 
-      if (scriptureElement.classList.contains('revealed')) {
-        scriptureElement.classList.remove('revealed');
+      if (scrollElement.classList.contains('revealed')) {
+        scrollElement.classList.remove('revealed');
+        scrollElement.classList.add('hidden');
         setTimeout(() => {
           scriptureText.textContent = scripture.text;
           scriptureRef.textContent = scripture.reference;
-          scriptureElement.classList.add('revealed');
-        }, 600);
+          illustration.textContent = scripture.icon;
+          scrollElement.classList.remove('hidden');
+          scrollElement.classList.add('revealed');
+        }, 400);
       } else {
         scriptureText.textContent = scripture.text;
         scriptureRef.textContent = scripture.reference;
-        scriptureElement.classList.add('revealed');
+        illustration.textContent = scripture.icon;
+        scrollElement.classList.remove('hidden');
+        scrollElement.classList.add('revealed');
       }
     });
 
