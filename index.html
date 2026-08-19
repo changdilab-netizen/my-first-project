@@ -238,13 +238,7 @@
     }
 
     .result-message {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #daa520;
-      min-height: 2.5rem;
-      font-weight: 700;
-      margin-top: 2.5rem;
-      letter-spacing: 0.5px;
+      display: none;
     }
 
     .subtitle {
@@ -527,17 +521,12 @@
           card.classList.add('revealed');
         }, 200 + index * 200);
       });
-
-      setTimeout(() => {
-        resultMessage.textContent = `"${cardData.name}"을(를) 선택하셨습니다! ✨`;
-      }, 600);
     }
 
     drawBtn.addEventListener('click', () => {
       const selectedCards = getRandomCards(3);
       cardsContainer.innerHTML = '';
       selectedCardData = null;
-      resultMessage.textContent = '카드를 선택해주세요';
 
       selectedCards.forEach((cardData, index) => {
         const cardElement = createCardElement(cardData, index);
