@@ -237,9 +237,6 @@
       transform: none;
     }
 
-    .result-message {
-      display: none;
-    }
 
     .subtitle {
       font-size: 0.95rem;
@@ -323,7 +320,6 @@
 
     <div id="cardsSection" style="display: none;">
       <div class="cards-container" id="cardsContainer"></div>
-      <div class="result-message" id="resultMessage">카드를 선택해주세요</div>
     </div>
 
     <div class="button-group">
@@ -460,7 +456,6 @@
     const shareBtn = document.getElementById('shareBtn');
     const cardsSection = document.getElementById('cardsSection');
     const cardsContainer = document.getElementById('cardsContainer');
-    const resultMessage = document.getElementById('resultMessage');
     let selectedCardData = null;
 
     function getRandomCards(count) {
