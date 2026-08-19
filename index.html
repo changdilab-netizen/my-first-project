@@ -332,8 +332,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>✨ 오늘의 운세 ✨</h1>
-    <p class="subtitle">카드를 뽑아 오늘의 운명을 알아보세요</p>
+    <h1>✨ 오늘의 말씀 ✨</h1>
+    <p class="subtitle">영감의 메시지를 받아보세요</p>
 
     <div class="card-container">
       <div class="card" id="card">
@@ -347,9 +347,9 @@
           </div>
         </div>
         <div class="card-face card-front">
-          <div class="card-symbol" id="cardSymbol">🔮</div>
-          <div class="card-name" id="cardName">타로</div>
-          <div class="card-message" id="cardMessage">카드를 뽑아주세요</div>
+          <div class="card-symbol" id="cardSymbol">📖</div>
+          <div class="card-name" id="cardName">말씀</div>
+          <div class="card-message" id="cardMessage">말씀을 받아주세요</div>
         </div>
       </div>
       <div class="sparkles">
@@ -364,131 +364,131 @@
       </div>
     </div>
 
-    <button id="drawBtn">오늘의 운세 뽑기</button>
+    <button id="drawBtn">오늘의 말씀 받기</button>
     <button id="shareBtn" class="share-btn">친구에게 공유하기</button>
   </div>
 
   <script>
     const cards = [
       {
-        name: '✦ 별',
+        name: '✦ 희망',
         symbol: '⭐',
-        message: '밝은 희망이 당신을 감싸고 있습니다.\n새로운 기회가 다가오고 있으니 준비하세요.'
+        message: '주님의 빛이 당신을 밝히고 있습니다.\n새로운 축복이 다가오고 있으니 마음을 열어두세요.'
       },
       {
-        name: '✦ 달',
+        name: '✦ 인도',
         symbol: '🌙',
-        message: '직관을 따르세요.\n무의식의 메시지가 당신을 인도하고 있습니다.'
+        message: '조용한 마음으로 하나님의 음성을 들으세요.\n영의 도움이 당신을 인도하고 있습니다.'
       },
       {
-        name: '✦ 태양',
+        name: '✦ 기쁨',
         symbol: '☀️',
-        message: '성공과 행복이 당신의 것입니다.\n모든 것이 밝게 빛날 준비가 되어 있습니다.'
+        message: '주님 안에서 기쁨을 누리세요.\n삶의 모든 순간이 축복으로 빛날 준비가 되어 있습니다.'
       },
       {
-        name: '✦ 운명의 수레바퀴',
+        name: '✦ 변화',
         symbol: '🎡',
-        message: '변화의 시간입니다.\n흐름을 받아들이고 새로운 시작을 맞이하세요.'
+        message: '하나님의 계획을 믿고 받아들이세요.\n이 변화 속에서 더 큰 목적이 드러날 것입니다.'
       },
       {
-        name: '✦ 힘',
+        name: '✦ 믿음',
         symbol: '🦁',
-        message: '당신 안에는 숨겨진 힘이 있습니다.\n내면의 용기를 발휘할 때입니다.'
+        message: '당신 안에 주님의 힘이 있습니다.\n두려움 없이 앞으로 나아가세요.'
       },
       {
-        name: '✦ 죽음(변화)',
+        name: '✦ 거듭남',
         symbol: '🦋',
-        message: '끝남은 새로운 시작입니다.\n과거를 놓고 새로운 자신으로 거듭나세요.'
+        message: '옛것은 지나고 새것이 시작됩니다.\n주님의 사랑 속에서 새로 태어나세요.'
       },
       {
-        name: '✦ 연인',
+        name: '✦ 연합',
         symbol: '💝',
-        message: '연결과 선택의 시간입니다.\n당신의 심장이 원하는 것을 믿으세요.'
+        message: '사랑과 용서 속에서 관계를 나누세요.\n마음이 맞는 사람들과 깊은 연결을 이루세요.'
       },
       {
-        name: '✦ 은둔자',
+        name: '✦ 명상',
         symbol: '🔦',
-        message: '내면의 목소리를 들어보세요.\n침묵 속에서 진리가 나타날 것입니다.'
+        message: '침묵 속에서 주님과 만나세요.\n내면의 평온함이 모든 답을 가져올 것입니다.'
       },
       {
-        name: '✦ 마술사',
+        name: '✦ 능력',
         symbol: '🎩',
-        message: '당신의 재능이 꽃피울 시간입니다.\n능력을 믿고 행동에 옮기세요.'
+        message: '당신이 받은 은사를 깨어나게 하세요.\n주님이 주신 재능을 세상에 드러내세요.'
       },
       {
-        name: '✦ 여사제',
+        name: '✦ 지혜',
         symbol: '👑',
-        message: '신비로운 지혜가 당신을 인도합니다.\n숨겨진 진실을 찾아보세요.'
+        message: '하나님의 지혜를 구하세요.\n영적 깨달음이 당신의 길을 밝힐 것입니다.'
       },
       {
-        name: '✦ 황제',
+        name: '✦ 리더십',
         symbol: '👨‍🦱',
-        message: '리더십과 권력이 당신의 손에 있습니다.\n자신감 있게 나아가세요.'
+        message: '주님의 사명을 받고 앞서 나아가세요.\n다른 사람들의 영혼을 돌보는 책임을 감당하세요.'
       },
       {
-        name: '✦ 황후',
+        name: '✦ 풍요',
         symbol: '👸',
-        message: '풍요로움과 창조성이 넘쳐날 것입니다.\n새로운 프로젝트를 시작하세요.'
+        message: '영적 풍요로움이 당신의 것입니다.\n주님의 충만한 은혜를 누려보세요.'
       },
       {
-        name: '✦ 교황',
+        name: '✦ 전통',
         symbol: '🙏',
-        message: '전통과 지혜를 존중하세요.\n멘토의 가르침이 도움이 될 것입니다.'
+        message: '영적 선배들의 가르침을 존중하세요.\n신앙의 유산 속에서 힘을 얻으세요.'
       },
       {
         name: '✦ 정의',
         symbol: '⚖️',
-        message: '균형과 공정함이 이루어질 것입니다.\n올바른 선택을 하세요.'
+        message: '올바름을 추구하세요.\n주님의 공의가 당신의 판단을 인도할 것입니다.'
       },
       {
         name: '✦ 절제',
         symbol: '🍷',
-        message: '조화와 인내의 시간입니다.\n균형 잡힌 접근이 성공의 열쇠입니다.'
+        message: '조절과 균형 속에서 영적 성숙을 이루세요.\n영혼의 평온함이 최고의 재산입니다.'
       },
       {
-        name: '✦ 악마',
+        name: '✦ 치유',
         symbol: '😈',
-        message: '당신의 욕망과 마주하세요.\n그것을 이해하면 자유로워질 것입니다.'
+        message: '상처를 직시하고 용서하세요.\n주님의 사랑이 모든 것을 치유할 것입니다.'
       },
       {
-        name: '✦ 탑',
+        name: '✦ 부활',
         symbol: '🗼',
-        message: '급격한 변화가 닥칠 수 있습니다.\n하지만 그것은 새로운 길을 열어줄 것입니다.'
+        message: '어려움 속에서도 부활의 소망을 잃지 마세요.\n새로운 생명이 앞으로 펼쳐질 것입니다.'
       },
       {
-        name: '✦ 희망',
+        name: '✦ 소망',
         symbol: '☁️',
-        message: '희망은 절대 사라지지 않습니다.\n미래는 더 밝을 것입니다.'
+        message: '주님의 약속을 기억하세요.\n영원한 소망이 모든 시련을 견디게 하실 것입니다.'
       },
       {
-        name: '✦ 행운',
+        name: '✦ 축복',
         symbol: '🍀',
-        message: '행운이 당신의 곁에 있습니다.\n이 기회를 놓치지 마세요.'
+        message: '축복의 시간입니다.\n주님의 은혜가 풍성히 내려질 것입니다.'
       },
       {
-        name: '✦ 영혼',
+        name: '✦ 성장',
         symbol: '👻',
-        message: '영혼의 성장이 시작됩니다.\n깊이 있는 삶을 살아가세요.'
+        message: '영의 깊이가 더해지고 있습니다.\n주님 안에서 계속 성장해 나가세요.'
       },
       {
-        name: '✦ 물',
+        name: '✦ 흐름',
         symbol: '💧',
-        message: '감정과 직관이 흐릅니다.\n당신의 마음을 믿으세요.'
+        message: '영의 인도함에 따르세요.\n주님의 뜻이 자연스럽게 이루어질 것입니다.'
       },
       {
-        name: '✦ 불',
+        name: '✦ 열정',
         symbol: '🔥',
-        message: '열정과 에너지가 폭발합니다.\n당신의 불을 밝혀내세요.'
+        message: '주님을 향한 사랑의 불을 밝히세요.\n헌신적인 마음으로 나아가세요.'
       },
       {
-        name: '✦ 바람',
+        name: '✦ 새로움',
         symbol: '🌪️',
-        message: '변화의 바람이 불어옵니다.\n새로운 아이디어가 떠오를 것입니다.'
+        message: '새로운 영의 바람이 불고 있습니다.\n신선한 시각으로 삶을 보세요.'
       },
       {
-        name: '✦ 대지',
+        name: '✦ 기초',
         symbol: '🌍',
-        message: '안정과 번영이 다가옵니다.\n뿌리를 내리고 성장하세요.'
+        message: '견고한 믿음의 기초를 다지세요.\n주님 위에 삶을 세우세요.'
       }
     ];
 
