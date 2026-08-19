@@ -485,13 +485,33 @@
     }
 
     function selectCard(wrapper, cardData) {
+      if (selectedCardData) return; // 이미 선택된 경우 무시
+
       document.querySelectorAll('.card-wrapper').forEach(w => {
         w.classList.remove('selected');
       });
 
       wrapper.classList.add('selected');
       selectedCardData = cardData;
-      resultMessage.textContent = `"${cardData.name}"을(를) 선택하셨습니다! ✨`;
+
+      // 선택한 카드 먼저 뒤집기
+      const selectedCard = wrapper.querySelector('.card');
+      selectedCard.classList.add('revealed');
+
+      // 나머지 카드들 순차적으로 뒤집기
+      const allWrappers = Array.from(document.querySelectorAll('.card-wrapper'));
+      const otherWrappers = allWrappers.filter(w => w !== wrapper);
+
+      otherWrappers.forEach((w, index) => {
+        setTimeout(() => {
+          const card = w.querySelector('.card');
+          card.classList.add('revealed');
+        }, 200 + index * 200);
+      });
+
+      setTimeout(() => {
+        resultMessage.textContent = `"${cardData.name}"을(를) 선택하셨습니다! ✨`;
+      }, 600);
     }
 
     drawBtn.addEventListener('click', () => {
@@ -503,11 +523,7 @@
       selectedCards.forEach((cardData, index) => {
         const cardElement = createCardElement(cardData, index);
         cardsContainer.appendChild(cardElement);
-
-        setTimeout(() => {
-          const card = cardElement.querySelector('.card');
-          card.classList.add('revealed');
-        }, 100 + index * 150);
+        // 카드를 뒷면 상태로 유지 (revealed 클래스 추가하지 않음)
       });
 
       cardsSection.style.display = 'block';
