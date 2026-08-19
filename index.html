@@ -103,6 +103,15 @@
       50% { text-shadow: 0 0 30px rgba(218, 165, 32, 0.8), 0 0 60px rgba(75, 0, 130, 0.5); }
     }
 
+    .date-display {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #b0956e;
+      letter-spacing: 1px;
+      margin-bottom: -0.5rem;
+      font-weight: 500;
+    }
+
     .cards-container {
       display: flex;
       gap: 2rem;
@@ -321,6 +330,7 @@
 </head>
 <body>
   <div class="container">
+    <p class="date-display" id="dateDisplay"></p>
     <h1>✨ 오늘의 운세 ✨</h1>
     <p class="subtitle">카드를 뽑아 오늘의 운명을 알아보세요</p>
 
@@ -462,7 +472,17 @@
     const shareBtn = document.getElementById('shareBtn');
     const cardsSection = document.getElementById('cardsSection');
     const cardsContainer = document.getElementById('cardsContainer');
+    const dateDisplay = document.getElementById('dateDisplay');
     let selectedCardData = null;
+
+    // 현재 날짜 표시
+    function updateDate() {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const date = today.getDate();
+      dateDisplay.textContent = `${month}월 ${date}일`;
+    }
+    updateDate();
 
     function getRandomCards(count) {
       const shuffled = [...cards].sort(() => Math.random() - 0.5);
